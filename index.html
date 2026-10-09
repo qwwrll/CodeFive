@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CodeFive — 5 хвилин коду щодня</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #101322;
+      color: #f4f5fc;
+      line-height: 1.6;
+    }
+
+    .container {
+      width: min(100% - 40px, 1000px);
+      margin: auto;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 0;
+    }
+
+    .logo {
+      font-size: 26px;
+      font-weight: bold;
+    }
+
+    .logo span {
+      color: #a99aff;
+    }
+
+    .badge {
+      color: #c6bfff;
+      border: 1px solid #6559a6;
+      border-radius: 20px;
+      padding: 5px 14px;
+      font-size: 14px;
+    }
+
+    .hero {
+      padding: 70px 0;
+      max-width: 750px;
+    }
+
+    h1 {
+      font-size: clamp(36px, 6vw, 60px);
+      line-height: 1.15;
+      margin: 16px 0 24px;
+    }
+
+    h1 span {
+      color: #a99aff;
+    }
+
+    .description {
+      font-size: 19px;
+      color: #c3c6da;
+      max-width: 620px;
+    }
+
+    button {
+      padding: 14px 24px;
+      border: none;
+      border-radius: 12px;
+      background: #a99aff;
+      color: #151126;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #bdb1ff;
+    }
+
+    button:focus-visible {
+      outline: 3px solid white;
+      outline-offset: 4px;
+    }
+
+    .hero button {
+      margin-top: 16px;
+    }
+
+    .note {
+      color: #aeb2ca;
+      font-size: 14px;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-bottom: 60px;
+    }
+
+    .card {
+      background: #1b2035;
+      border: 1px solid #333a57;
+      border-radius: 18px;
+      padding: 24px;
+    }
+
+    .card h3 {
+      margin-top: 0;
+    }
+
+    .card p {
+      color: #c3c6da;
+    }
+
+    #challenge {
+      margin-bottom: 60px;
+      scroll-margin-top: 24px;
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+
+    pre {
+      background: #0d1020;
+      padding: 20px;
+      border-radius: 12px;
+      overflow-x: auto;
+      font-size: 17px;
+      color: #d5ceff;
+    }
+
+    .answers {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .answer {
+      background: #303852;
+      color: white;
+      border: 1px solid #59617e;
+    }
+
+    .answer:hover {
+      background: #424d70;
+    }
+
+    .answer:disabled {
+      cursor: default;
+      opacity: 0.65;
+    }
+
+    #result {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+
+    #explanation {
+      color: #c3c6da;
+    }
+
+    footer {
+      padding: 24px 0;
+      border-top: 1px solid #333a57;
+      color: #aeb2ca;
+      font-size: 14px;
+    }
+
+    @media (max-width: 650px) {
+      .features {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding: 40px 0;
+      }
+
+      header {
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">Code<span>Five</span></div>
+      <div class="badge">Навчальний MVP</div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <p class="badge" style="display: inline-block;">
+          Для розробників, які вивчають JavaScript
+        </p>
+
+        <h1>Прокачуй JavaScript.<br><span>5 хвилин щодня.</span></h1>
+
+        <p class="description">
+          Практикуйся на коротких код-челенджах,
+          перевіряй свої відповіді та розбирайся у складних темах
+          без довгих навчальних занять.
+        </p>
+
+        <button id="startButton" type="button">
+          Спробувати челендж
+        </button>
+
+        <p class="note">
+          Безкоштовна демонстрація • Без реєстрації
+        </p>
+      </section>
+
+      <section class="features" aria-label="Переваги CodeFive">
+        <article class="card">
+          <h3>⏱ Коротка практика</h3>
+          <p>
+            Один невеликий челендж, який можна пройти
+            під час перерви.
+          </p>
+        </article>
+
+        <article class="card">
+          <h3>💡 Зрозумілі пояснення</h3>
+          <p>
+            Дізнайся не лише правильну відповідь,
+            а й причину такого результату.
+          </p>
+        </article>
+
+        <article class="card">
+          <h3>🎯 Фокус на слабких темах</h3>
+          <p>
+            У майбутній версії планується добір вправ
+            за результатами попередніх відповідей.
+          </p>
+        </article>
+      </section>
+
+      <section id="challenge" class="card" hidden
+        aria-labelledby="challengeTitle">
+        <p class="note">Пробний челендж • JavaScript • Масиви</p>
+
+        <h2 id="challengeTitle">Що виведе цей код?</h2>
+
+        <pre><code>const numbers = [1, 2, 3];
+const result = numbers.map(number => number * 2);
+
+console.log(result);</code></pre>
+
+        <p>Обери одну відповідь:</p>
+
+        <div class="answers">
+          <button class="answer" type="button" data-correct="false">
+            [1, 2, 3]
+          </button>
+
+          <button class="answer" type="button" data-correct="true">
+            [2, 4, 6]
+          </button>
+
+          <button class="answer" type="button" data-correct="false">
+            [3, 4, 5]
+          </button>
+        </div>
+
+        <p id="result" role="status" aria-live="polite"></p>
+        <p id="explanation" hidden>
+          Метод map() створює новий масив із результатів
+          виконання функції для кожного елемента.
+          Тут кожне число множиться на 2:
+          1 → 2, 2 → 4, 3 → 6.
+          Початковий масив numbers не змінюється.
+        </p>
+
+        <button id="retryButton" type="button" hidden>
+          Спробувати ще раз
+        </button>
+      </section>
+    </main>
+
+    <footer>
+      CodeFive © 2026. Прототип для перевірки продуктової гіпотези.
+    </footer>
+  </div>
+
+  <script>
+    const startButton = document.getElementById("startButton");
+    const challenge = document.getElementById("challenge");
+    const answers = document.querySelectorAll(".answer");
+    const result = document.getElementById("result");
+    const explanation = document.getElementById("explanation");
+    const retryButton = document.getElementById("retryButton");
+
+    startButton.addEventListener("click", () => {
+      challenge.hidden = false;
+      challenge.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+      answers[0].focus({ preventScroll: true });
+    });
+
+    answers.forEach(answer => {
+      answer.addEventListener("click", () => {
+        const isCorrect = answer.dataset.correct === "true";
+
+        result.textContent = isCorrect
+          ? "✅ Правильно! Відповідь: [2, 4, 6]."
+          : "❌ Цього разу неправильно. Правильна відповідь: [2, 4, 6].";
+
+        result.style.color = isCorrect ? "#8de3b0" : "#ffb2b2";
+        explanation.hidden = false;
+        retryButton.hidden = false;
+
+        answers.forEach(button => {
+          button.disabled = true;
+        });
+      });
+    });
+
+    retryButton.addEventListener("click", () => {
+      result.textContent = "";
+      explanation.hidden = true;
+      retryButton.hidden = true;
+
+      answers.forEach(button => {
+        button.disabled = false;
+      });
+
+      answers[0].focus();
+    });
+  </script>
+</body>
+</html>
